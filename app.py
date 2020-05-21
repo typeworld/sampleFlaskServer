@@ -39,7 +39,7 @@ def api():
 	# Subscription ID
 	# String identifying a subscription on your server.
 	# For example, the user account of your commercial font customer
-	# could be identified by an anonymous ID pointint to that user account.
+	# could be identified by an anonymous ID.
 	# You have made the `subscriptionID` known to the Type.World app as part of the subscription URL.
 	# See: https://type.world/developer#the-subscription-url
 	subscriptionID = request.values.get('subscriptionID')
