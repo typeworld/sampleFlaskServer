@@ -31,7 +31,7 @@ def api():
 	# All valid requests must carry `commands`. If they don’t, they are probably not coming from the Type.World App.
 	# You can use this as a cheap first step to to sort valid from invalid traffic
 	if not commands:
-		return abort(404)
+		return handleAbort(404)
 
 	# Otherwise, parse commands into list:
 	commandsList = commands.split(',')
@@ -128,6 +128,20 @@ def api():
 
 	# Return the response with the correct MIME type `application/json` (or otherwise the app will complain)
 	return Response(jsonData, mimetype='application/json')
+
+def handleAbort(code):
+	'''
+	You can use this method to handle all malformed requests.
+	Depending on what kind of security shields you have in place, you could keep informing them
+	about malformed requests so that eventually a DOS attack shield could kick in, for instance.
+	'''
+
+	# Handle malformed request here
+	# ...
+
+	# Return flask’s abort() method with HTTP status code
+	return abort(code)
+
 
 
 # Run this web server locally under https://127.0.0.1:8080/
