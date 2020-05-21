@@ -1,8 +1,8 @@
 # Dummy Flask Server for the Type.World JSON Protocol
 
-In `app.py` you’ll find a sample implementation for an API Endpoint that serves JSON data under the Type.World JSON Protocol (see: https://github.com/typeworld/typeworld/tree/master/Lib/typeworld/api#user-content-class-rootresponse).
+In `app.py` you’ll find a sample implementation for an API Endpoint that serves JSON data under the Type.World JSON Protocol (see: https://github.com/typeworld/typeworld/tree/master/Lib/typeworld/api).
 
-This server in NOT COMPLETE and needs to be connected to your own environment, databases etc. It provides some guidance to your own implementation, but can’t finish the task for you. You need to do that.
+This server in **NOT FUNCTIONAL** and needs to be connected to your own environment, databases etc. It provides some guidance to your own implementation, but can’t finish the task for you. You need to do that.
 
 Also, this sample server uses the `typeworld.api` module for creating the object structure, which exists only fpr Pytfon, which can then be easily put out as JSON code with `root.dumpJSON()`.
 
