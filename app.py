@@ -116,7 +116,14 @@ def api():
 		elif command == 'uninstallFonts':
 			uninstallFonts(root)
 
-	# Export root object into nicely formatted JSON data
+	# Export root object into nicely formatted JSON data.
+	# This is the moment of truth if you have indeed used the Python object tree as provided by `typeworld.api`.
+	# While individual attributes have already been checked earlier, when they were set, here the entire
+	# object tree will undergo a validation process to see that all data has been put together in a logical way
+	# and that nothing is missing.
+	# If you are not using `typeworld.api` or are implementing your server in another programming language,
+	# please validate your server using the online validator at https://type.world/developer/validate
+	# In the future, the validator will also be made available offline in `typeworld.tools`
 	jsonData = root.dumpJSON()
 
 	# Return the response with the correct MIME type `application/json` (or otherwise the app will complain)
