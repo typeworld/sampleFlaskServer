@@ -637,7 +637,7 @@ def createInstallFontsObjectTree(installFonts, fonts, subscriptionID, anonymousA
 
 def createUninstallFontsObjectTree(uninstallFonts, fonts, subscriptionID, anonymousAppID, userName, userEmail, __ownDataSource__):
 	'''
-	Apply incoming data of `__ownDataSource__` to `installFonts`
+	Apply incoming data of `__ownDataSource__` to `uninstallFonts`
 	'''
 
 	# Parse fonts into list
