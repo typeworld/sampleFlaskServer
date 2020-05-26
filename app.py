@@ -228,9 +228,9 @@ def installableFonts(root, subscriptionURL, APIKey, subscriptionID, secretKey, a
 		# Find user
 		__user__ = __userBySubscriptionID__(subscriptionID)
 
-		# User doesn't exist, return `insufficientPermission` immediately
+		# User doesn't exist, return `validTypeWorldUserAccountRequired` immediately
 		if __user__ == None:
-			installableFonts.response = 'insufficientPermission'
+			installableFonts.response = 'validTypeWorldUserAccountRequired'
 			return True, None
 
 		# Secret Key doesn't match with user, return `insufficientPermission` immediately
@@ -281,9 +281,9 @@ def installableFonts(root, subscriptionURL, APIKey, subscriptionID, secretKey, a
 				if verifiedTypeWorldUserCredentials == True:
 					securityCheckPassed = True
 
-		# Still didn’t pass security check, return `validTypeWorldUserAccountRequired` immediately
+		# Still didn’t pass security check, return `insufficientPermission` immediately
 		if securityCheckPassed == False:
-			installableFonts.response = 'validTypeWorldUserAccountRequired'
+			installableFonts.response = 'insufficientPermission'
 			return True, None
 
 		# End of SECURITY CHECK
@@ -348,9 +348,9 @@ def installFonts(root, fonts, subscriptionURL, APIKey, subscriptionID, secretKey
 	# Find user
 	__user__ = __userBySubscriptionID__(subscriptionID)
 
-	# User doesn't exist, return `insufficientPermission` immediately
+	# User doesn't exist, return `validTypeWorldUserAccountRequired` immediately
 	if __user__ == None:
-		installableFonts.response = 'insufficientPermission'
+		installableFonts.response = 'validTypeWorldUserAccountRequired'
 		return True, None
 
 	# Secret Key doesn't match with user, return `insufficientPermission` immediately
@@ -385,9 +385,9 @@ def installFonts(root, fonts, subscriptionURL, APIKey, subscriptionID, secretKey
 		if verifiedTypeWorldUserCredentials == True:
 			securityCheckPassed = True
 
-	# Still didn’t pass security check, return `validTypeWorldUserAccountRequired` immediately
+	# Still didn’t pass security check, return `insufficientPermission` immediately
 	if securityCheckPassed == False:
-		installableFonts.response = 'validTypeWorldUserAccountRequired'
+		installableFonts.response = 'insufficientPermission'
 		return True, None
 
 	# End of SECURITY CHECK
@@ -426,9 +426,9 @@ def uninstallFonts(root, fonts, subscriptionURL, APIKey, subscriptionID, secretK
 	# Find user
 	__user__ = __userBySubscriptionID__(subscriptionID)
 
-	# User doesn't exist, return `insufficientPermission` immediately
+	# User doesn't exist, return `validTypeWorldUserAccountRequired` immediately
 	if __user__ == None:
-		installableFonts.response = 'insufficientPermission'
+		installableFonts.response = 'validTypeWorldUserAccountRequired'
 		return True, None
 
 	# Secret Key doesn't match with user, return `insufficientPermission` immediately
@@ -460,9 +460,9 @@ def uninstallFonts(root, fonts, subscriptionURL, APIKey, subscriptionID, secretK
 		if verifiedTypeWorldUserCredentials == True:
 			securityCheckPassed = True
 
-	# Still didn’t pass security check, return `validTypeWorldUserAccountRequired` immediately
+	# Still didn’t pass security check, return `insufficientPermission` immediately
 	if securityCheckPassed == False:
-		installableFonts.response = 'validTypeWorldUserAccountRequired'
+		installableFonts.response = 'insufficientPermission'
 		return True, None
 
 	# End of SECURITY CHECK
