@@ -835,9 +835,10 @@ def verifyUserCredentials(
     if subscriptionURL:
         parameters["subscriptionURL"] = subscriptionURL
 
-    # We’re using typeworld’s built-in performRequest() method here which loops through a request up to 10 times
-    # in case an instance of the central server disappears during the request
+    # We’re using typeworld’s built-in request() method here which loops through a request up to 10 times
+    # in case an instance of the central server disappears during the request.
     # See the WARNING at https://type.world/developer#typeworld-api
+    # If you’re implementing this in a language other than Python, make sure to read and follow that warning.
     success, response, responseObject = typeworld.client.request(
         "https://api.type.world/v1/verifyCredentials", parameters
     )
