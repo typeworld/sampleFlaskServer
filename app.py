@@ -1,14 +1,15 @@
-# Import Flask web server
-from flask import Flask, Response, request, redirect, session as flaskSession, abort, g
-
-global app
-app = Flask(__name__)
-
 # Import typeworld module
-import typeworld.api, typeworld.client
+import typeworld.api
+import typeworld.client
 
 # Import JSON module
 import json
+
+# Import Flask web server
+from flask import Flask, Response, request, abort
+
+global app
+app = Flask(__name__)
 
 # Main API Endpoint URL
 # For security reasons (so that URLs don’t show up in server logs anywhere),
