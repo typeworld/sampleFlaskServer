@@ -9,10 +9,6 @@ import typeworld.api, typeworld.client
 # Import JSON module
 import json
 
-# Create SSL context for verification requests with the central type.world server
-import ssl, certifi
-SSLCONTEXT = ssl.create_default_context(cafile=certifi.where())
-
 # Main API Endpoint URL
 # For security reasons (so that URLs don’t show up in server logs anywhere),
 # we’re only allowing POST requests, where data is transmitted hidden in the requests’ HTTP headers
@@ -709,14 +705,14 @@ def verifyUserCredentials(APIKey, anonymousAppID, anonymousTypeWorldUserID, subs
 	# We’re using typeworld’s built-in performRequest() method here which loops through a request up to 10 times
 	# in case an instance of the central server disappears during the request
 	# See the WARNING at https://type.world/developer#typeworld-api
-	success, response = typeworld.client.performRequest('https://api.type.world/v1/verifyCredentials', parameters, SSLCONTEXT)
+	success, response, responseObject = typeworld.client.request('https://api.type.world/v1/verifyCredentials', parameters)
 
 	# Request was successfully returned
 	# Note: This means that the HTTP request was successful, not that the user has been verified. This will be confirmed a few lines down.
 	if success:
 
 		# Read response data from a JSON string
-		responseData = json.loads(response.read().decode())
+		responseData = json.loads(response.decode())
 
 		# Verfification process was successful
 		if responseData['response'] == 'success':
