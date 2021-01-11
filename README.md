@@ -4,7 +4,7 @@ In `app.py` you’ll find a sample implementation for an API Endpoint that serve
 
 You can use this as a starting point for your own implementation.
 
-This server in **NOT FUNCTIONAL** and needs to be connected to your own environment, databases etc. It provides some guidance to your own implementation, but can’t do the magic for you. You need to do that.
+This server in **NOT FUNCTIONAL** and needs to be connected to your own environment, databases etc. It provides some guidance to your own implementation, but can’t do the magic for you.
 All variables with double underscores such as `__ownDataSource__` indicate that these need to be set up by you, containing your data. You may freely rename these methods and variables to match your data setup.
 
 This sample server uses the `typeworld.api` module (of https://github.com/typeworld/typeworld) for creating the object structure, which can then be easily put out as JSON code with `root.dumpJSON()`.

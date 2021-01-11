@@ -575,7 +575,17 @@ def uninstallFonts(
 
 def createInstallableFontsObjectTree(installableFonts, __ownDataSource__):
     """
-    Apply incoming data of `__ownDataSource__` to `installableFonts`
+    Apply incoming data of `__ownDataSource__` to `installableFonts`.
+
+    This sample code here is very abstract and incomplete.
+    Each font publisher has their own database structure and therefore
+    a complete example cannot be created.
+    You may not even want to use __ownDataSource__ or this method at all.
+
+    Basically, you need to fill in all the minimal required data (and more) into
+    the object structure indicated below following your own logic.
+    The object structure is defined in detail here:
+    https://github.com/typeworld/typeworld/tree/master/Lib/typeworld/api
     """
 
     # Designers
