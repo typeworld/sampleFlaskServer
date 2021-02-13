@@ -115,6 +115,13 @@ def api():
     # You can obtain such an API Key by registering your API Endpoint in the user account section on https://type.world
     APIKey = "__APIKey__"
 
+    # Incoming API Key
+    # For certain procedures the central type.world server will access your API endpoint. For instance,
+    # when you want to announce a subscription update with the central server’s "updateSubscription" command,
+    # the central server will query the subscription from your API endpoint for verification. To authenticate itself,
+    # the incoming request will carry the same API key that you use to authenticate yourself in the other direction.
+    incomingAPIKey = request.values.get("APIKey")
+
     # Process the commands in the order they were given.
     # It is mandatory that they are executed in the given order to retain certain logic.
     # For example, when installing a "protected" font, the `installFonts` command is defined
@@ -251,6 +258,7 @@ def installableFonts(
     root,
     subscriptionURL,
     APIKey,
+    incomingAPIKey,
     subscriptionID,
     secretKey,
     accessToken,
@@ -320,7 +328,11 @@ def installableFonts(
             else:
                 # Verify user with central type.world server now, save into global variable `verifiedTypeWorldUserCredentials`
                 verifiedTypeWorldUserCredentials = verifyUserCredentials(
-                    APIKey, anonymousAppID, anonymousTypeWorldUserID, subscriptionURL
+                    APIKey,
+                    incomingAPIKey,
+                    anonymousAppID,
+                    anonymousTypeWorldUserID,
+                    subscriptionURL,
                 )
 
                 # User was successfully validated:
@@ -389,6 +401,7 @@ def installFonts(
     fonts,
     subscriptionURL,
     APIKey,
+    incomingAPIKey,
     subscriptionID,
     secretKey,
     accessToken,
@@ -441,7 +454,11 @@ def installFonts(
     else:
         # Verify user with central type.world server now, save into global variable `verifiedTypeWorldUserCredentials`
         verifiedTypeWorldUserCredentials = verifyUserCredentials(
-            APIKey, anonymousAppID, anonymousTypeWorldUserID, subscriptionURL
+            APIKey,
+            incomingAPIKey,
+            anonymousAppID,
+            anonymousTypeWorldUserID,
+            subscriptionURL,
         )
 
         # User was successfully validated:
@@ -489,6 +506,7 @@ def uninstallFonts(
     fonts,
     subscriptionURL,
     APIKey,
+    incomingAPIKey,
     subscriptionID,
     secretKey,
     accessToken,
@@ -536,7 +554,11 @@ def uninstallFonts(
     else:
         # Verify user with central type.world server now, save into global variable `verifiedTypeWorldUserCredentials`
         verifiedTypeWorldUserCredentials = verifyUserCredentials(
-            APIKey, anonymousAppID, anonymousTypeWorldUserID, subscriptionURL
+            APIKey,
+            incomingAPIKey,
+            anonymousAppID,
+            anonymousTypeWorldUserID,
+            subscriptionURL,
         )
 
         # User was successfully validated:
@@ -829,11 +851,23 @@ def createUninstallFontsObjectTree(
 
 
 def verifyUserCredentials(
-    APIKey, anonymousAppID, anonymousTypeWorldUserID, subscriptionURL=None
+    APIKey,
+    incomingAPIKey,
+    anonymousAppID,
+    anonymousTypeWorldUserID,
+    subscriptionURL=None,
 ):
     """
     Verify a valid Type.World user account with the central server
     """
+
+    # Shortcut: if APIKey is identical to incomingAPIKey, that means that the
+    # request comes from the central server and since it sent your own API key for
+    # verification, we can instantly return the verification to be successful
+    if APIKey == incomingAPIKey:
+        return True
+
+    # Otherwise, send the normal verification request to the central server
 
     # Default parameters
     parameters = {
