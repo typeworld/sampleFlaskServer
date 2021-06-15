@@ -716,9 +716,13 @@ def createInstallFontsObjectTree(
         if __fontDataSource__ == None:
             asset.response = "unknownFont"
 
+        # In case your server observes license compliance, it needs to track
+        # font installations. These are identified by the tripled
+        # `subscriptionID, anonymousAppID, fontID`.
+
         # See whether user’s seat allowance has been reached for this font
         seats = __ownDataSource__.__recordedFontInstallations__(
-            fontID, subscriptionID, anonymousAppID
+            subscriptionID, anonymousAppID, fontID
         )
 
         # Installed seats have reached seat allowance, return `seatAllowanceReached`
@@ -749,32 +753,32 @@ def createInstallFontsObjectTree(
                 # Font has not been previously installed, so no record exists:
                 if seats == None:
                     __ownDataSource__.__recordFontInstallation__(
-                        fontID,
-                        fontVersion,
                         subscriptionID,
                         anonymousAppID,
-                        userName,
-                        userEmail,
+                        fontID,
+                        fontVersion,  # Not to be used for installation identification
+                        userName,  # Not to be used for installation identification
+                        userEmail,  # Not to be used for installation identification
                     )
 
                 # Font has been previously installed (so a record exists), but is marked as 'uninstalled', so we update that
                 else:
                     __ownDataSource__.__updateFontInstallation__(
-                        fontID,
                         subscriptionID,
                         anonymousAppID,
+                        fontID,
                         trialInstalledStatus=True,
                     )
 
             # Font is not a trial font, so just record installation normally
             else:
                 __ownDataSource__.__recordFontInstallation__(
-                    fontID,
-                    fontVersion,
                     subscriptionID,
                     anonymousAppID,
-                    userName,
-                    userEmail,
+                    fontID,
+                    fontVersion,  # Not to be used for installation identification
+                    userName,  # Not to be used for installation identification
+                    userEmail,  # Not to be used for installation identification
                 )
 
     # Return successfully, no message
