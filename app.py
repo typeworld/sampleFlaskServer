@@ -417,19 +417,19 @@ def installFonts(
 
     # Create `installFonts` object, attach to `root`
     installFonts = typeworld.api.InstallFontsResponse()
-    root.installFonts = installableFonts
+    root.installFonts = installFonts
 
     # Find user
     __user__ = __userBySubscriptionID__(subscriptionID)
 
     # User doesn't exist, return `validTypeWorldUserAccountRequired` immediately
     if __user__ == None:
-        installableFonts.response = "validTypeWorldUserAccountRequired"
+        installFonts.response = "validTypeWorldUserAccountRequired"
         return True, None
 
     # Secret Key doesn't match with user, return `insufficientPermission` immediately
     if secretKey != __user__.__secretKey__:
-        installableFonts.response = "insufficientPermission"
+        installFonts.response = "insufficientPermission"
         return True, None
 
     # TODO for later: Add `loginRequired` response here
@@ -467,7 +467,7 @@ def installFonts(
 
     # Still didn’t pass security check, return `insufficientPermission` immediately
     if securityCheckPassed == False:
-        installableFonts.response = "insufficientPermission"
+        installFonts.response = "insufficientPermission"
         return True, None
 
     # End of SECURITY CHECK
