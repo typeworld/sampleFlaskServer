@@ -630,7 +630,7 @@ def createInstallableFontsObjectTree(installableFonts, __ownDataSource__):
 
         # Create Foundry object, attach to `installableFonts.foundries`, apply data
         foundry = typeworld.api.Foundry()
-        installableFonts.foundry.append(foundry)
+        installableFonts.foundries.append(foundry)
 
         # Apply data
         designer.keyword = __foundryDataSource__.__keyword__
