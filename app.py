@@ -105,9 +105,7 @@ def api():
     # For various processing purposes, we need to assemble a complete subscriptionURL here
     # The below example assumes a protected subscription with ID and secret key as per subscription URL Format C
     # (see: https://type.world/developer#the-subscription-url)
-    subscriptionURL = (
-        f"typeworld://json+{subscriptionID}:{secretKey}@awesomefonts.com/api"
-    )
+    subscriptionURL = f"typeworld://json+{subscriptionID}:{secretKey}@awesomefonts.com/api"
 
     # API Key
     # Each API Endpoint needs to possess a secret API Key to use when accessing certain commands of the central
@@ -357,9 +355,7 @@ def installableFonts(
         __ownDataSource__ = __user__.__subscriptionDataSource__()
 
         # Create object tree for `installableFonts` out of font data in `__ownDataSource__`
-        success, message = createInstallableFontsObjectTree(
-            installableFonts, __ownDataSource__
-        )
+        success, message = createInstallableFontsObjectTree(installableFonts, __ownDataSource__)
 
         # Process: Return value is of type integer, which means we handle a request abort with HTTP code
         if not success and type(message) == int:
@@ -384,9 +380,7 @@ def installableFonts(
         __ownDataSource__ = __freeFontDataSource__()
 
         # Create object tree for `installableFonts` out of free font data in `__ownDataSource__`
-        success, message = createInstallableFontsObjectTree(
-            installableFonts, __ownDataSource__
-        )
+        success, message = createInstallableFontsObjectTree(installableFonts, __ownDataSource__)
 
         # Process: Return value is of type integer, which means we handle a request abort with HTTP code
         if not success and type(message) == int:
@@ -724,9 +718,7 @@ def createInstallFontsObjectTree(
         # `subscriptionID, anonymousAppID, fontID`.
 
         # See whether user’s seat allowance has been reached for this font
-        seats = __ownDataSource__.__recordedFontInstallations__(
-            subscriptionID, anonymousAppID, fontID
-        )
+        seats = __ownDataSource__.__recordedFontInstallations__(subscriptionID, anonymousAppID, fontID)
 
         # Installed seats have reached seat allowance, return `seatAllowanceReached`
         if seats >= __fontDataSource__.__licenseDataSource__.__allowedSeats__:
@@ -821,9 +813,7 @@ def createUninstallFontsObjectTree(
             asset.response = "unknownFont"
 
         # See how many seats the user has installed
-        seats = __ownDataSource__.__recordedFontInstallations__(
-            fontID, subscriptionID, anonymousAppID
-        )
+        seats = __ownDataSource__.__recordedFontInstallations__(fontID, subscriptionID, anonymousAppID)
 
         # No seats have been recorded for this `anonymousAppID`, so we return the `unknownInstallation` command
         # Note: This is critical for the remote de-authorization for entire app instances to work properly,
@@ -849,9 +839,7 @@ def createUninstallFontsObjectTree(
 
             # Font is not a trial font, so just delete the installation record normally
             else:
-                __ownDataSource__.__deleteFontInstallationRecord__(
-                    fontID, subscriptionID, anonymousAppID
-                )
+                __ownDataSource__.__deleteFontInstallationRecord__(fontID, subscriptionID, anonymousAppID)
 
     # Return successfully, no message
     return True, None
