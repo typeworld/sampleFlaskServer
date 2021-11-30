@@ -524,12 +524,12 @@ def uninstallFonts(
 
     # User doesn't exist, return `validTypeWorldUserAccountRequired` immediately
     if __user__ == None:
-        installableFonts.response = "validTypeWorldUserAccountRequired"
+        uninstallFonts.response = "validTypeWorldUserAccountRequired"
         return True, None
 
     # Secret Key doesn't match with user, return `insufficientPermission` immediately
     if secretKey != __user__.__secretKey__:
-        installableFonts.response = "insufficientPermission"
+        uninstallFonts.response = "insufficientPermission"
         return True, None
 
     ##################################################################
