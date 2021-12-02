@@ -105,7 +105,7 @@ def api():
     # For various processing purposes, we need to assemble a complete subscriptionURL here
     # The below example assumes a protected subscription with ID and secret key as per subscription URL Format C
     # (see: https://type.world/developer#the-subscription-url)
-    subscriptionURL = f"typeworld://json+{subscriptionID}:{secretKey}@awesomefonts.com/api"
+    subscriptionURL = f"typeworld://json+https//{subscriptionID}:{secretKey}@awesomefonts.com/api"
 
     # API Key
     # Each API Endpoint needs to possess a secret API Key to use when accessing certain commands of the central
