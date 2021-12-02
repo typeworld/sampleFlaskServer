@@ -732,6 +732,7 @@ def createInstallFontsObjectTree(
         asset.encoding = "base64"
         asset.mimeType = "font/otf"
         asset.data = __fontDataSource__.__binaryFontData__
+        asset.version = __fontDataSource__.__version__
 
         # Font is not a free font
         if __fontDataSource__.__protected__:
