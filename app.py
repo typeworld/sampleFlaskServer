@@ -2,7 +2,8 @@
 import typeworld.api
 import typeworld.client
 
-# Import JSON module
+# Import third party modules
+import base64
 import json
 
 # Import Flask web server
@@ -731,7 +732,7 @@ def createInstallFontsObjectTree(
         asset.uniqueID = __fontDataSource__.__uniqueID__
         asset.encoding = "base64"
         asset.mimeType = "font/otf"
-        asset.data = __fontDataSource__.__binaryFontData__
+        asset.data = base64.b64encode(__fontDataSource__.__binaryFontData__).decode()
         asset.version = __fontDataSource__.__version__
 
         # Font is not a free font
